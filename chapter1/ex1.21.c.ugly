@@ -1,0 +1,41 @@
+#include <stdio.h>
+#define SPACES_OF_TAB 8;
+
+int main()
+{
+    int count = 0;
+    int spaces = 0;
+    int c;
+    while((c = getchar()) != EOF)
+    {
+        if(c == ' ')
+            spaces++;
+        else
+        {
+            if(spaces)
+            {
+                count%=SPACES_OF_TAB;
+                int tabs = (spaces + count) / SPACES_OF_TAB;
+                int nspaces;
+                if(tabs){
+                    nspaces = (spaces + count) % SPACES_OF_TAB;
+                    count = 0;
+                }
+                else
+                    nspaces = spaces;
+                while(tabs--)
+                    putchar('\t');
+                while(nspaces--) {
+                    putchar(' ');
+                    count++;
+                }
+                spaces = 0;
+            }
+            if(c == '\t' || c == '\n')
+                count = 0;
+            else
+                count++;
+            putchar(c);
+        }
+    }
+}
